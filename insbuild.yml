@@ -15,3 +15,12 @@
           path: "/srv/HOA11.1/"
           source: build
         state: present
+
+    - name: launch docker container
+      docker_container:
+        name: "test"
+        image: democontainer:v1.0
+        state: started
+        ports:
+        - "80:8080"
+      register: docker_info
