@@ -1,0 +1,17 @@
+---
+- hosts: db_servers
+  gather_facts: no
+  tasks:
+    - name: copy Dockerfile
+      copy:
+        src: "HOA11.1"
+        dest: "/srv/"
+
+    - name: build container image
+      docker_image:
+        name: democontainer:v1.0
+        build:
+          pull: yes
+          path: "/srv/HOA11.1/"
+          source: build
+        state: present
